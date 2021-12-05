@@ -51,6 +51,12 @@
                 border: none;
                 border-radius: 5px;
             }
+            a {
+                color: #ae2121;
+            }
+            a:hover {
+                color: black;
+            }
         </style>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="robots" content="noindex" />
@@ -98,7 +104,8 @@
                 <input type="password" name="password_confirmation">
             </div>
             <div class="input-group">
-                <button type="submit" class="btn" name="register_btn">Patvirtinti</button>
+                <button type="submit" class="btn" name="register_btn">Registruotis</button>
+                <a href="{{route('login')}}" style="float:right">Atgal į prisijungimo langą</a>
             </div>
         </form>
     </body>

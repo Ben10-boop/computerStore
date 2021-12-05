@@ -35,6 +35,8 @@ class registerController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'status' => 'active', //active, unconfirmed?, blocked, deleted
+            'level' => 'klientas' //klientas, darbuotojas, administratorius
         ]);
 
         //signing in the user

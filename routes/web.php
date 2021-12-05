@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\usersSystem\editUserController;
 use App\Http\Controllers\usersSystem\logoutController;
 use App\Http\Controllers\usersSystem\loginController;
 use App\Http\Controllers\usersSystem\registerController;
@@ -16,10 +17,12 @@ use App\Http\Controllers\usersSystem\homeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/editUser', [editUserController::class, 'index'])->name('editUser');
+Route::post('/editUser', [editUserController::class, 'save_changes']);
+
 Route::post('/logout', [logoutController::class, 'log_out'])->name('logout');
 
 Route::get('/', [homeController::class, 'index'])->name('home');
-Route::get('/home', [homeController::class, 'index']);
 
 Route::get('/login', [loginController::class, 'index'])->name('login');
 Route::post('/login', [loginController::class, 'log_in']);

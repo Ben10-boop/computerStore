@@ -51,6 +51,12 @@
                 border: none;
                 border-radius: 5px;
             }
+            a {
+                color: #ae2121;
+            }
+            a:hover {
+                color: black;
+            }
         </style>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="robots" content="noindex" />

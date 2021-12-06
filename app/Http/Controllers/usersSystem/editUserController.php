@@ -5,6 +5,7 @@ namespace App\Http\Controllers\usersSystem;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class editUserController extends Controller
 {
@@ -20,6 +21,11 @@ class editUserController extends Controller
         if(auth()->user()->level != 'klientas'){
             return redirect()->route('home')->with('status', 'Sussy baka');;
         }
+
+        //formatting the birth date to cut the time part (there probably is a better solution)
+        $d = Str::before(auth()->user()->birth_date, ' ');
+        //storing the formatted date in the session
+        session(['bd' => $d]);
 
         return view('usersSystem.editUser');
     }
@@ -37,6 +43,7 @@ class editUserController extends Controller
             'gender' => 'max:255',
         ]);
 
+        //storing the updated information in the database
         User::save_edit($request);
 
         //redirecting back to edit user page

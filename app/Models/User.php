@@ -52,7 +52,8 @@ class User extends Authenticatable
         'birth_date' => 'datetime',
     ];
 
-    public function save_edit($request){
+    //scuffed way of editing info in db, but I don't know better
+    public static function save_edit($request){
         DB::table('users')->where('id', auth()->user()->id)->update(['username' => $request->username,
                                                                      'name' => $request->name,
                                                                      'last_name' => $request->last_name,

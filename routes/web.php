@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\usersSystem\blockUserController;
+use App\Http\Controllers\usersSystem\addWorkerController;
 use App\Http\Controllers\usersSystem\editUserController;
 use App\Http\Controllers\usersSystem\logoutController;
 use App\Http\Controllers\usersSystem\loginController;
@@ -17,6 +19,12 @@ use App\Http\Controllers\usersSystem\homeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/blockUser', [blockUserController::class, 'index'])->name('blockUser');
+Route::post('/blockUser', [blockUserController::class, 'save_changes']);
+
+Route::get('/addWorker', [addWorkerController::class, 'index'])->name('addWorker');
+Route::post('/addWorker', [addWorkerController::class, 'save']);
+
 Route::get('/editUser', [editUserController::class, 'index'])->name('editUser');
 Route::post('/editUser', [editUserController::class, 'save_changes']);
 

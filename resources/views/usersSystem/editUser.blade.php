@@ -1,6 +1,20 @@
 @extends('include.menu')
 
 @section('menu')
+    @if (auth()->user()->level == "darbuotojas")
+        <table style="margin:0px auto">
+            <tr>
+                <td>
+                    <ul>
+                        <li>Atlyginimas: <b>{{auth()->user()->wage}}</b></li>
+                        <li>Įdarbinimo data:<b>{{auth()->user()->hire_date}}</b></li>
+                        <li>Darbo valandos per savaitę:<b>{{auth()->user()->work_hours}}</b></li>
+                        <li>Pareigos:<b>{{auth()->user()->job}}</b></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    @endif
     <div class="header" style="width:50%">
         <h2>Paskyros redagavimas (Pagrindiniai elementai)</h2>
     </div>
@@ -87,4 +101,5 @@
             <button type="submit" class="btn">Patvirtinti pakeitimus</button>
         </div>
     </form>
+    <br>
 @endsection

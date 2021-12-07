@@ -30,7 +30,11 @@ class loginController extends Controller
         if(!auth()->attempt($request->only('email', 'password')))
         {
             // back() returns to the last page visited
-            return back()->with('status', 'Invalid login details');
+            return back()->with('status', 'Netinkami prisijungimo duomenys');
+        }
+        if(auth()->user()->status != "aktyvus"){
+            auth()->logout();
+            return back()->with('status', 'Jūsų paskyra užblokuota arba ištrinta');
         }
 
         //redirecting to main page

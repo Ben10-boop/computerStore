@@ -53,14 +53,27 @@
                 border: none;
                 border-radius: 5px;
             }
-            tr, td {
-                padding: 5px
-            }
             a {
                 color: #ae2121;
             }
             a:hover {
                 color: black;
+            }
+            td {
+                padding: 5px;
+            }
+            .blockTable {
+                margin: 0px auto;
+                border: 4px solid #ae2121;
+                border-radius: 5px;
+            }
+            .blockTable th {
+                color: white;
+                background-color: #ae2121;
+            }
+            .blockTable td {
+                border: 4px solid #ae2121;
+                background-color: white;
             }
         </style>
     </head>
@@ -73,8 +86,13 @@
             <table>
                 <tr>
                     <td><a href="{{route('home')}}">Namų puslapis</a></td>
-                    <td><a href="">Funkcija 2</a></td>
                     <td><a href="{{route('editUser')}}">Redaguoti paskyrą</a></td>
+                    @if (auth()->user()->level == "administratorius")
+                        <td><a href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a></td>
+                    @endif
+                    @if (auth()->user()->level == "administratorius")
+                        <td><a href="{{route('blockUser')}}">Blokuoti naudotoją</a></td>
+                    @endif
                     <!-- other operations -->
                     <td style="float:right">
                         <form action="{{route('logout')}}" method="post">

@@ -17,11 +17,6 @@ class editUserController extends Controller
 
     public function index()
     {
-        //example of restricting functionality if user type is wrong
-        if(auth()->user()->level != 'klientas'){
-            return redirect()->route('home')->with('status', 'Sussy baka');;
-        }
-
         //formatting the birth date to cut the time part (there probably is a better solution)
         $d = Str::before(auth()->user()->birth_date, ' ');
         //storing the formatted date in the session

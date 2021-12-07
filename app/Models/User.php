@@ -29,7 +29,11 @@ class User extends Authenticatable
         'city',
         'gender',
         'status',
-        'level'
+        'level',
+        'wage',
+        'hire_date',
+        'work_hours',
+        'job',
     ];
 
     /**
@@ -62,5 +66,10 @@ class User extends Authenticatable
                                                                      'city' => $request->city,
                                                                      'gender' => $request->gender
                                                                     ]);
+    }
+
+    //scuffed way of editing info in db, but I don't know better
+    public static function change_status($id, $newStatus){
+        DB::table('users')->where('id', $id)->update(['status' => $newStatus]);
     }
 }

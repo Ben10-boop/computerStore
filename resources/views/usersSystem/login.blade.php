@@ -91,7 +91,7 @@
             </div>
             @if (session('status'))
             <div style="font-size:16px;color:red">
-                {{session('status')}}
+                <b>{{session('status')}}</b>
             </div>
             @endif
             <div class="input-group">

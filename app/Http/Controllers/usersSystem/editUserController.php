@@ -5,6 +5,7 @@ namespace App\Http\Controllers\usersSystem;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Adresas;
 use Illuminate\Support\Str;
 
 class editUserController extends Controller
@@ -12,7 +13,7 @@ class editUserController extends Controller
     //makes it so the controller can only be accessed if the user is logged in
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'verified']);
     }
 
     public function index()

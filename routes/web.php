@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\usersSystem\blockUserController;
 use App\Http\Controllers\usersSystem\addWorkerController;
 use App\Http\Controllers\usersSystem\editUserController;
@@ -34,6 +36,22 @@ Route::get('/', [homeController::class, 'index'])->name('home');
 
 Route::get('/login', [loginController::class, 'index'])->name('login');
 Route::post('/login', [loginController::class, 'log_in']);
+
+Route::get('/verifyEmail', function () {
+    return view('usersSystem.verifyEmail');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/verifyEmail/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('home')->with('status', 'Elektroninio pašto adresas patvirtintas sėkmingai!');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/verifyEmail/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'Laiškas išsiūstas!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/register', [registerController::class, 'index'])->name('register');
 Route::post('/register', [registerController::class, 'save']);

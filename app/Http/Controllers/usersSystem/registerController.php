@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\usersSystem;
 
+use Illuminate\Auth\Events\Registered;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -41,6 +42,7 @@ class registerController extends Controller
 
         //signing in the user
         auth()->attempt($request->only('email', 'password'));
+        event(new Registered(auth()->user()));
 
         //redirecting to main page
         return redirect()->route('home');

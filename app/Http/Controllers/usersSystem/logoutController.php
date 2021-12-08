@@ -10,7 +10,7 @@ class logoutController extends Controller
     //makes it so the controller can only be accessed if the user is logged in
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'verified']);
     }
 
     public function log_out()

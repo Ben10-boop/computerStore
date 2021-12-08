@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\usersSystem;
+namespace App\Http\Controllers\shopSystem;
 
 use App\Http\Controllers\Controller;
 use Request;
 use App\Models\Preke;
 
-class homeController extends Controller
+class monthlyRevenueController extends Controller
 {
     //makes it so the controller can only be accessed if the user is logged in
     public function __construct()
@@ -24,7 +24,7 @@ class homeController extends Controller
             ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
             ->get();
 
-        return view('index', [
+        return view('shopSystem.monthlyRevenue', [
             'products_list' => $products_list,
         ]);
     }

@@ -4,17 +4,8 @@
     <div style="font-size:16px;padding:10px;color:red">
         <b>{{session('status')}}</b>
     </div>
-
-    <form action="{{route('home')}}">
-        <input onChange="return {{route('home')}}" name ="filter"></input>
-        <button type="submit">Filtruoti prekes</button>
-    </form>
-    
-    <div style="font-size:16px;padding:10px;color:red">
-        <b>{{session('status')}}</b>
-    </div>
     <div class="header" style="width:50%">
-        <h2>Prekių sąrašo peržiūra</h2>
+        <h2>Mėnesinės pelno ataskaitos peržiūra</h2>
     </div>
     <br>
     <table class="blockTable" style="width:55%">
@@ -37,4 +28,3 @@
     </table>
     <br>
 @endsection
-

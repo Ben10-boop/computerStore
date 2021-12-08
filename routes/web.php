@@ -10,7 +10,12 @@ use App\Http\Controllers\usersSystem\logoutController;
 use App\Http\Controllers\usersSystem\loginController;
 use App\Http\Controllers\usersSystem\registerController;
 use App\Http\Controllers\usersSystem\homeController;
-
+use App\Http\Controllers\usersSystem\productsController;
+use App\Http\Controllers\shopSystem\monthlyRevenueController;
+use App\Http\Controllers\shopSystem\viewCategoriesController;
+use App\Http\Controllers\shopSystem\addCategoryController;
+use App\Http\Controllers\shopSystem\editCategoryController;
+/*
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +26,14 @@ use App\Http\Controllers\usersSystem\homeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/blockUser', [blockUserController::class, 'index'])->name('blockUser');
+Route::get('/blockUser', [blockUserController::class, 'index'])->name(
+    'blockUser'
+);
 Route::post('/blockUser', [blockUserController::class, 'save_changes']);
 
-Route::get('/addWorker', [addWorkerController::class, 'index'])->name('addWorker');
+Route::get('/addWorker', [addWorkerController::class, 'index'])->name(
+    'addWorker'
+);
 Route::post('/addWorker', [addWorkerController::class, 'save']);
 
 Route::get('/editUser', [editUserController::class, 'index'])->name('editUser');
@@ -55,3 +64,26 @@ Route::post('/verifyEmail/verification-notification', function (Request $request
 
 Route::get('/register', [registerController::class, 'index'])->name('register');
 Route::post('/register', [registerController::class, 'save']);
+
+Route::get('/products', [productsController::class, 'index'])->name('products');
+
+Route::get('/monthlyRevenue', [monthlyRevenueController::class, 'index'])->name(
+    'monthlyRevenue'
+);
+
+Route::get('/categories', [viewCategoriesController::class, 'index'])->name(
+    'categories'
+);
+
+Route::get('/addCategory', [addCategoryController::class, 'index'])->name(
+    'addCategory'
+);
+Route::post('/addCategory', [addCategoryController::class, 'save']);
+
+Route::get('/editCategory', [
+    editCategoryController::class,
+    'index',
+    'edit_id' => 1,
+])->name('editCategory');
+
+Route::post('/editCategory', [editCategoryController::class, 'save_changes']);

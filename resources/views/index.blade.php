@@ -23,7 +23,9 @@
             <th>Aprašymas</th>
             <th>Pagaminimo šalis</th>
             <th>Pagaminimo metai</th>
+            <th>Kaina</th>
             <th>nuoroda_i_foto</th>
+            <th>Kategorijos</th>
         </tr>
         @foreach ($products_list as $item)
         <tr>
@@ -31,7 +33,9 @@
             <td>{{$item->aprasymas}}</td>
             <td>{{$item->pagaminimo_salis}}</td>
             <td>{{$item->pagaminimo_metai}}</td>
+            <td>{{$item->suma}}</td>
             <td>{{$item->nuoroda_i_foto}}</td>
+            <td>{{$item->kategoriju_sarasas}}</td>
         </tr>
         @endforeach
     </table>

@@ -18,7 +18,10 @@ class addCategoryController extends Controller
     public function index()
     {
         //only workers are allowed to access this function, other users get sent away
-        if (auth()->user()->level != 'darbuotojas') {
+        if (
+            auth()->user()->level != 'darbuotojas' &&
+            auth()->user()->level != 'administratorius'
+        ) {
             return redirect()
                 ->route('home')
                 ->with('status', 'Sussy baka');
@@ -50,7 +53,7 @@ class addCategoryController extends Controller
 
         //redirecting with message
         return redirect()
-            ->route('addCategory')
+            ->route('categories')
             ->with('status', 'Kategorija sėkmingai sukurta');
     }
 }

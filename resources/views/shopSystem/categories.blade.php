@@ -7,6 +7,11 @@
     <div class="header" style="width:50%">
         <h2>Kategorijos</h2>
     </div>
+
+    <form method="get" action="{{route('addCategory')}}">
+        @csrf
+        <button type="submit" class="btn">Nauja kategorija</button>
+    </form>
     <br>
     <table class="blockTable" style="width:55%">
         <tr>

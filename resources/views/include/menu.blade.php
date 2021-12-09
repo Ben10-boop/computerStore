@@ -92,7 +92,7 @@
                         <td><a href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a></td>
                     @endif
                     @if (auth()->user()->level == "administratorius")
-                        <td><a href="{{route('blockUser')}}">Blokuoti naudotoją</a></td>
+                        <td><a href="{{route('blockUser')}}">Naudotojų sąrašas</a></td>
                     @endif
                     @if (auth()->user()->level == "administratorius")
                         <td><a href="{{route('monthlyRevenue')}}">Mėnesinė pelno ataskaita</a></td>

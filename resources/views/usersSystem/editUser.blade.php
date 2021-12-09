@@ -97,9 +97,21 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <button type="submit" class="btn">Patvirtinti pakeitimus</button>
-        </div>
+        <table>
+            <tr>
+                <td style="width:33%">
+                    <div class="input-group">
+                        <button type="submit" class="btn">Patvirtinti pakeitimus</button>
+                    </div>
+                </td>
+                <td style="width:33%">
+                    <a href="{{route('editAddress')}}" style="float:right">Redaguoti adresus</a>
+                </td>
+                <td style="width:33%">
+                    <a href="{{route('editAddress')}}" style="float:right">Redaguoti banko kortelę</a>
+                </td>
+            </tr>
+        </table>
     </form>
     <br>
 @endsection

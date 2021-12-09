@@ -18,11 +18,11 @@ class addCategoryController extends Controller
     public function index()
     {
         //only workers are allowed to access this function, other users get sent away
-        /*if (auth()->user()->level != 'darbuotojas') {
+        if (auth()->user()->level != 'darbuotojas') {
             return redirect()
                 ->route('home')
                 ->with('status', 'Sussy baka');
-        }*/
+        }
 
         return view('shopSystem.addCategory');
     }
@@ -30,11 +30,11 @@ class addCategoryController extends Controller
     public function save(Request $request)
     {
         //only wqorkers are allowed to access this function, other users get sent away
-        /*if (auth()->user()->level != 'administratorius') {
+        if (auth()->user()->level != 'administratorius') {
             return redirect()
                 ->route('home')
                 ->with('status', 'Sussy baka');
-        }*/
+        }
 
         //validation
         $this->validate($request, [

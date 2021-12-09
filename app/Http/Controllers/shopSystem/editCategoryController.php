@@ -15,9 +15,10 @@ class editCategoryController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function index($edit_id)
+    public function index(Request $request)
     {
-        $editableCategory = Kategorijo::where('id', $edit_id)->get();
+        $edit_id = $request->edit;
+        $editableCategory = Kategorijo::get()->where('id', $edit_id);
 
         return view('shopSystem.editCategory', [
             'editableCategory' => $editableCategory,
@@ -36,6 +37,6 @@ class editCategoryController extends Controller
         Kategorijo::save_edit($request);
 
         //redirecting back to edit category page
-        return redirect()->route('editCategory');
+        return redirect()->route('categories');
     }
 }

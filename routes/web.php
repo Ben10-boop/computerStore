@@ -48,19 +48,31 @@ Route::post('/login', [loginController::class, 'log_in']);
 
 Route::get('/verifyEmail', function () {
     return view('usersSystem.verifyEmail');
-})->middleware('auth')->name('verification.notice');
+})
+    ->middleware('auth')
+    ->name('verification.notice');
 
-Route::get('/verifyEmail/{id}/{hash}', function (EmailVerificationRequest $request) {
+Route::get('/verifyEmail/{id}/{hash}', function (
+    EmailVerificationRequest $request
+) {
     $request->fulfill();
 
-    return redirect()->route('home')->with('status', 'Elektroninio pašto adresas patvirtintas sėkmingai!');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+    return redirect()
+        ->route('home')
+        ->with('status', 'Elektroninio pašto adresas patvirtintas sėkmingai!');
+})
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
 
-Route::post('/verifyEmail/verification-notification', function (Request $request) {
+Route::post('/verifyEmail/verification-notification', function (
+    Request $request
+) {
     $request->user()->sendEmailVerificationNotification();
 
     return back()->with('status', 'Laiškas išsiūstas!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+})
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
 
 Route::get('/register', [registerController::class, 'index'])->name('register');
 Route::post('/register', [registerController::class, 'save']);
@@ -74,16 +86,15 @@ Route::get('/monthlyRevenue', [monthlyRevenueController::class, 'index'])->name(
 Route::get('/categories', [viewCategoriesController::class, 'index'])->name(
     'categories'
 );
+Route::post('/categories', [viewCategoriesController::class, 'save_changes']);
 
 Route::get('/addCategory', [addCategoryController::class, 'index'])->name(
     'addCategory'
 );
 Route::post('/addCategory', [addCategoryController::class, 'save']);
 
-Route::get('/editCategory', [
-    editCategoryController::class,
-    'index',
-    'edit_id' => 1,
-])->name('editCategory');
+Route::get('/editCategory', [editCategoryController::class, 'index'])->name(
+    'editCategory'
+);
 
 Route::post('/editCategory', [editCategoryController::class, 'save_changes']);

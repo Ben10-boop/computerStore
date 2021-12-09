@@ -13,19 +13,28 @@
                     </ul>
                 </td>
             </tr>
+            
         </table>
     @endif
     <div class="header" style="width:50%">
         <h2>Kategorijos redagavimas (Pagrindiniai elementai)</h2>
+        @foreach ($editableCategory as $item)
+        <tr>
+            <td>{{$item->id}}</td>
+            <td>{{$item->pavadinimas}}</td>
+            <td>{{$item->aprasas}}</td>
+        </tr>
+        @endforeach
     </div>
+    @foreach ($editableCategory as $item)
     <form class="content" style="width:50%" method="post" action="{{route('editCategory')}}">
         <!-- need the csrf tag in every POST method form -->
         @csrf
-        <input type="hidden" name="id" value="{{$editableCategory->id}}">
+        <input type="hidden" name="id" value="{{$item->id}}">
 
         <div class="input-group">
             <label>Pavadinimas:</label>
-            <input type="text" name="pavadinimas" value="{{$editableCategory->pavadinimas}}">
+            <input type="text" name="pavadinimas" value="{{$item->pavadinimas}}"></input>
 
             @error('pavadinimas')
                 <div style="font-size:16px;color:red">
@@ -35,7 +44,7 @@
         </div>
         <div class="input-group">
             <label>Aprašas:</label>
-            <input type="text" name="aprasas" value="{{$editableCategory->aprasas}}">
+            <input type="text" name="aprasas" value="{{$item->aprasas}}">
 
             @error('aprasas')
                 <div style="font-size:16px;color:red">
@@ -47,5 +56,6 @@
             <button type="submit" class="btn">Patvirtinti pakeitimus</button>
         </div>
     </form>
+    @endforeach
     <br>
 @endsection

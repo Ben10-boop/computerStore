@@ -87,8 +87,6 @@
                 <tr>
                     <td><a href="{{route('home')}}">Namų puslapis</a></td>
                     <td><a href="{{route('editUser')}}">Redaguoti paskyrą</a></td>
-                    <td><a href="{{route('monthlyRevenue')}}">Mėnesinė pelno ataskaita</a></td>
-                    <td><a href="{{route('categories')}}">Kategorijos</a></td>
 
                     @if (auth()->user()->level == "administratorius")
                         <td><a href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a></td>

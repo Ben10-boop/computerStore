@@ -4,6 +4,7 @@ namespace App\Http\Controllers\usersSystem;
 
 use App\Http\Controllers\Controller;
 use Request;
+use DB;
 use App\Models\Preke;
 
 class homeController extends Controller
@@ -18,10 +19,38 @@ class homeController extends Controller
     {
         $filter = Request::get('filter', ''); // ima filtro reiksme, jei nera - default ''
 
-        $products_list = Preke::where('barkodas', 'like', '%' . $filter . '%')
+        $products_list = Preke::select(
+            'prekes.id as id',
+            DB::raw(
+                'GROUP_CONCAT(kategorijos.pavadinimas) as kategoriju_sarasas'
+            ),
+            'kainos.id as kainos_id',
+            'barkodas',
+            'aprasymas',
+            'pagaminimo_salis',
+            'pagaminimo_metai',
+            'nuoroda_i_foto',
+            'suma',
+            DB::raw('MAX(pradzios_data) as latest_price_date')
+        )
+            ->where('barkodas', 'like', '%' . $filter . '%')
             ->orWhere('aprasymas', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_salis', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
+            ->leftJoin('kainos', 'kainos.prekes_id', '=', 'prekes.id')
+            ->leftJoin(
+                'prekes_kategorijos',
+                'prekes_kategorijos.prekes_id',
+                '=',
+                'prekes.id'
+            )
+            ->leftJoin(
+                'kategorijos',
+                'prekes_kategorijos.kategorijos_id',
+                '=',
+                'kategorijos.id'
+            )
+            ->groupBy('prekes.id')
             ->get();
 
         return view('index', [

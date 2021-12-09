@@ -38,11 +38,15 @@ Route::get('/addWorker', [addWorkerController::class, 'index'])->name(
 );
 Route::post('/addWorker', [addWorkerController::class, 'save']);
 
-Route::get('/editCredit', [editCreditController::class, 'index'])->name('editCredit');
+Route::get('/editCredit', [editCreditController::class, 'index'])->name(
+    'editCredit'
+);
 Route::post('/editCredit', [editCreditController::class, 'save']);
 Route::delete('/editCredit', [editCreditController::class, 'delete']);
 
-Route::get('/editAddress', [editAddressController::class, 'index'])->name('editAddress');
+Route::get('/editAddress', [editAddressController::class, 'index'])->name(
+    'editAddress'
+);
 Route::post('/editAddress', [editAddressController::class, 'save']);
 Route::delete('/editAddress', [editAddressController::class, 'delete']);
 

@@ -70,7 +70,7 @@
             <!-- need the csrf tag in every POST method form -->
             @csrf
             <div class="input-group">
-                <label>Vartotojo vardas:</label>
+                <label>Naudotojo vardas:</label>
                 <input type="text" name="username" value="{{old('username')}}">
 
                 @error('username')

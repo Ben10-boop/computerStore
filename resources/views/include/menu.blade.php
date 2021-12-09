@@ -91,7 +91,7 @@
                         <td><a href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a></td>
                     @endif
                     @if (auth()->user()->level == "administratorius")
-                        <td><a href="{{route('blockUser')}}">Blokuoti naudotoją</a></td>
+                        <td><a href="{{route('blockUser')}}">Naudotojų sąrašas</a></td>
                     @endif
                     <!-- other operations -->
                     <td style="float:right">

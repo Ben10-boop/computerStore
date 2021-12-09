@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\usersSystem\editCreditController;
+use App\Http\Controllers\usersSystem\editAddressController;
 use App\Http\Controllers\usersSystem\blockUserController;
 use App\Http\Controllers\usersSystem\addWorkerController;
 use App\Http\Controllers\usersSystem\editUserController;
@@ -26,6 +28,14 @@ Route::post('/blockUser', [blockUserController::class, 'save_changes']);
 
 Route::get('/addWorker', [addWorkerController::class, 'index'])->name('addWorker');
 Route::post('/addWorker', [addWorkerController::class, 'save']);
+
+Route::get('/editCredit', [editCreditController::class, 'index'])->name('editCredit');
+Route::post('/editCredit', [editCreditController::class, 'save']);
+Route::delete('/editCredit', [editCreditController::class, 'delete']);
+
+Route::get('/editAddress', [editAddressController::class, 'index'])->name('editAddress');
+Route::post('/editAddress', [editAddressController::class, 'save']);
+Route::delete('/editAddress', [editAddressController::class, 'delete']);
 
 Route::get('/editUser', [editUserController::class, 'index'])->name('editUser');
 Route::post('/editUser', [editUserController::class, 'save_changes']);

@@ -37,6 +37,7 @@ class homeController extends Controller
             ->orWhere('aprasymas', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_salis', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
+            ->orWhere('pavadinimas', 'like', '%' . $filter . '%')
             ->leftJoin('kainos', 'kainos.prekes_id', '=', 'prekes.id')
             ->leftJoin(
                 'prekes_kategorijos',

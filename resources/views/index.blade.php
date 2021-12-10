@@ -16,31 +16,21 @@
         <button class="btn btn-outline-success inline" type="submit">Filtruoti prekes</button>
     </form>
     <br>
-    <table class='table thead-dark table-bordered table-hover'  >
-    <thead style="background: #d1d1d1">    <tr>
-            <th>Barkodas</th>
-            <th>Aprašymas</th>
-            <th>Pagaminimo šalis</th>
-            <th>Pagaminimo metai</th>
-            <th>Kaina</th>
-            <th>nuoroda_i_foto</th>
-            <th>Kategorijos</th>
-        </tr>
-    </thead>
-    <tbody>
+        
+    <div class="row row-cols-1 row-cols-md-4">
         @foreach ($products_list as $item)
-        <tr>
-            <td>{{$item->barkodas}}</td>
-            <td>{{$item->aprasymas}}</td>
-            <td>{{$item->pagaminimo_salis}}</td>
-            <td>{{$item->pagaminimo_metai}}</td>
-            <td>{{$item->suma}}</td>
-            <td>{{$item->nuoroda_i_foto}}</td>
-            <td>{{$item->kategoriju_sarasas}}</td>
-        </tr>
+  <div class="col mb-4">
+    <div class="card">
+      <img src="{{$item->nuoroda_i_foto}}" class="card-img-top" style="height: 350px; widht: 100px; object-fit: cover;" >
+      <div class="card-body">
+        <h5 class="card-title">{{$item->prek_pavadinimas}}</h5>
+        <p class="card-text">Kaina: {{$item->suma}} eur.</p>
+        <p class="card-text">Priklauso kategorijoms: {{$item->kategoriju_sarasas}}</p>
+      </div>
+    </div>
+  </div>
         @endforeach
-    </tbody>
-    </table>
+</div>
     </div>
     <br>
 @endsection

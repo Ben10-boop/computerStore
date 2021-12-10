@@ -24,6 +24,7 @@ class homeController extends Controller
             DB::raw(
                 'GROUP_CONCAT(kategorijos.pavadinimas) as kategoriju_sarasas'
             ),
+            'prek_pavadinimas',
             'kainos.id as kainos_id',
             'barkodas',
             'aprasymas',

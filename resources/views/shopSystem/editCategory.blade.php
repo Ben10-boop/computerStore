@@ -16,25 +16,20 @@
             
         </table>
     @endif
-    <div class="header" style="width:50%">
-        <h2>Kategorijos redagavimas (Pagrindiniai elementai)</h2>
-        @foreach ($editableCategory as $item)
-        <tr>
-            <td>{{$item->id}}</td>
-            <td>{{$item->pavadinimas}}</td>
-            <td>{{$item->aprasas}}</td>
-        </tr>
-        @endforeach
+    <div class="moduleHeader" >
+        <h2>Kategorijos redagavimas</h2>
     </div>
+
+    <div style="width: 95%; margin: auto" >
     @foreach ($editableCategory as $item)
-    <form class="content" style="width:40%; margin: auto" method="post" action="{{route('editCategory')}}">
+    <form class="content" style="width:40%; margin: auto" method="post"  action="{{route('editCategory')}}">
         <!-- need the csrf tag in every POST method form -->
         @csrf
         <input type="hidden" name="id" value="{{$item->id}}">
 
-        <div class="input-group">
-            <label>Pavadinimas:</label>
-            <input type="text" name="pavadinimas" value="{{$item->pavadinimas}}"></input>
+        <div class=" form-group col">
+        <label class="control-label" >Pavadinimas:</label>
+            <input type="text" class="form-control input-sm"  name="pavadinimas" value="{{$item->pavadinimas}}"></input>
 
             @error('pavadinimas')
                 <div style="font-size:16px;color:red">
@@ -42,9 +37,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Aprašas:</label>
-            <input type="text" name="aprasas" value="{{$item->aprasas}}">
+        <div class=" form-group col">
+        <label class="control-label" >Aprašas:</label>
+            <input type="text"  class="form-control input-sm"  name="aprasas" value="{{$item->aprasas}}">
 
             @error('aprasas')
                 <div style="font-size:16px;color:red">
@@ -52,10 +47,12 @@
                 </div>
             @enderror
         </div>
+        <br>
         <div class="input-group">
-            <button type="submit" class="btn">Patvirtinti pakeitimus</button>
+            <button type="submit" style=" width: 100%"  class=" btn btn-secondary createButton">Patvirtinti pakeitimus</button>
         </div>
     </form>
     @endforeach
+    </div>
     <br>
 @endsection

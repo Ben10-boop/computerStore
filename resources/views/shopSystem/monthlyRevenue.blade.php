@@ -13,7 +13,7 @@
     <thead style="background: #d1d1d1">
         <tr >
             <th>Barkodas</th>
-            <th>Aprašymas</th>
+            <th>Pavadinimas</th>
             <th>Pagaminimo šalis</th>
             <th>Pagaminimo metai</th>
             <th>Vnt kaina</th>
@@ -25,7 +25,7 @@
         @foreach ($products_list as $item)
         <tr>
             <td>{{$item->barkodas}}</td>
-            <td>{{$item->aprasymas}}</td>
+            <td>{{$item->prek_pavadinimas}}</td>
             <td>{{$item->pagaminimo_salis}}</td>
             <td>{{$item->pagaminimo_metai}}</td>
             <td>{{$item->vnt_kaina}}</td>

@@ -23,6 +23,7 @@ class monthlyRevenueController extends Controller
             'prekes.id as id',
             'kainos.id as kainos_id',
             'barkodas',
+            'prek_pavadinimas',
             'aprasymas',
             'pagaminimo_salis',
             'pagaminimo_metai',
@@ -44,6 +45,7 @@ class monthlyRevenueController extends Controller
                 'prekes.id'
             )
             ->groupBy('prekes.id')
+            //->groupBy(' MONTH(MAX(pradzios_data) )')
             ->get();
 
         return view('shopSystem.monthlyRevenue', [

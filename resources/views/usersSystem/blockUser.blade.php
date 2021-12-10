@@ -58,8 +58,8 @@
                     <input type="hidden" name="unblock" value="{{$item->id}}">
                     <button type="submit" class="btn" name="block_btn">
                         
-                    <img src ="https://maxcdn.icons8.com/Share/icon/Editing//edit1600.png" style = "height: 20px;">
-                    Atblokuoti
+                    <img src ="https://cdn2.iconfinder.com/data/icons/Siena/256/unlock%20green.png" style = "height: 20px;">
+                    
                 </button>
                 </form>
             </td>
@@ -69,8 +69,8 @@
                     @csrf
                     <input type="hidden" name="block" value="{{$item->id}}">
                     <button type="submit" class="btn" name="block_btn">
-                        <img src ="https://maxcdn.icons8.com/Share/icon/Editing//edit1600.png" style = "height: 20px;">
-                   Blokuoti</button>
+                        <img src ="https://cdn-icons-png.flaticon.com/512/718/718672.png" style = "height: 20px;">
+                   </button>
                 </form>
             </td>
             @endif

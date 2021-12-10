@@ -7,109 +7,95 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
         <style>
             body {
-                font-size: 120%;
+                font-size: 100%;
                 background: #F8F8FF;
             }
             .header {
-                width: 95%;
-                margin: 50px auto 0px;
+                width: 100%;
                 color: white;
                 background: #ae2121;
                 text-align: center;
-                border: 1px solid #B0C4DE;
-                border-bottom: none;
-                border-radius: 10px 10px 0px 0px;
                 padding: 20px 20px 5px 20px;
             }
-            .content {
+            
+            .moduleHeader{
                 width: 95%;
-                margin: 0px auto;
-                padding: 20px;
-                border: 1px solid #B0C4DE;
-                background: white;
-                border-radius: 0px 0px 10px 10px;
+                text-align: center;
+                padding: 20px 20px 5px 20px;
             }
-            .input-group {
-                margin: 10px 0px 10px 0px;
+            .navbar{
+                font-size: 110%;
             }
-            .input-group label {
-                display: block;
-                text-align: left;
-                margin: 3px;
+            .container-fluid{
+                width: 95%;
             }
-            .input-group input {
-                height: 30px;
-                width: 93%;
-                padding: 5px 10px;
-                font-size: 16px;
-                border-radius: 5px;
-                border: 1px solid gray;
+            .addButton{
+                background: grey;
             }
-            .btn {
-                padding: 10px;
-                font-size: 15px;
-                color: white;
-                background: #ae2121;
-                border: none;
-                border-radius: 5px;
+            .navbar{
+                text-align: center;
+                margin: auto;
+                background: #d1d1d1;
+                font-size: 105%;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
             }
-            a {
-                color: #ae2121;
-            }
-            a:hover {
+            .nav-link{
                 color: black;
             }
-            td {
-                padding: 5px;
+            .nav-link:hover{
+                color: grey;
             }
-            .blockTable {
-                margin: 0px auto;
-                border: 4px solid #ae2121;
-                border-radius: 5px;
+            .logOutBtn{
+                float: right;
+                margin-top: 10px;
             }
-            .blockTable th {
-                color: white;
-                background-color: #ae2121;
+            
+            .createButton{
+                float: right;
             }
-            .blockTable td {
-                border: 4px solid #ae2121;
-                background-color: white;
-            }
+            
         </style>
     </head>
     <body>
         <div class="header">
             <h1>Kompiuterių ir žaidimų parduotuvė</h1>
-            <p style="text-align:left;font-size:80%;padding-top:15px">Prisijungęs naudotojas: <b>{{auth()->user()->username}}</b>; tipas: <b>{{auth()->user()->level}}</b></p>
+            <p>Prisijungęs naudotojas: <b>{{auth()->user()->username}}</b>; tipas: <b>{{auth()->user()->level}}</b></p>
         </div>
-        <div class="content">
-            <table>
-                <tr>
-                    <td><a href="{{route('home')}}">Namų puslapis</a></td>
-                    <td><a href="{{route('editUser')}}">Redaguoti paskyrą</a></td>
+    
+        <nav class="navbar navbar-expand">
+            <div class="container-fluid">
+            <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('home')}}">Namų puslapis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('editUser')}}">Redaguoti paskyrą</a>
+            </li>
+            
+            @if (auth()->user()->level == "administratorius")
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('blockUser')}}">Naudotojų sąrašas</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('monthlyRevenue')}}">Mėnesinė pelno ataskaita</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('categories')}}">Kategorijos</a>
+            </li>
+            @endif
+        </ul>
+        </div>
+        </nav>
 
-                    @if (auth()->user()->level == "administratorius")
-                        <td><a href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a></td>
-                    @endif
-                    @if (auth()->user()->level == "administratorius")
-                        <td><a href="{{route('blockUser')}}">Naudotojų sąrašas</a></td>
-                    @endif
-                    @if (auth()->user()->level == "administratorius")
-                        <td><a href="{{route('monthlyRevenue')}}">Mėnesinė pelno ataskaita</a></td>
-                    @endif 
-                    @if (auth()->user()->level == "administratorius")
-                        <td><a href="{{route('categories')}}">Kategorijos</a></td>
-                    @endif
-                    <!-- other operations -->
-                    <td style="float:right">
-                        <form action="{{route('logout')}}" method="post">
-                            @csrf
-                            <button class="btn" type="submit">Atsijungti</button>
-                        </form>
-                    </td>
-                </tr>
-            </table>
+        <div style="width: 95%; margin: auto" >
+        <form class="  logOutBtn"   action="{{route('logout')}}" method="post">
+            <button class="btn btn-outline-success " type="submit">Atsijungti</button>
+        </form>
         </div>
+        <br>
         @yield('menu')
     </body>
 </html>

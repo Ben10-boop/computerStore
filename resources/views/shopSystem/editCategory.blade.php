@@ -27,7 +27,7 @@
         @endforeach
     </div>
     @foreach ($editableCategory as $item)
-    <form class="content" style="width:50%" method="post" action="{{route('editCategory')}}">
+    <form class="content" style="width:40%; margin: auto" method="post" action="{{route('editCategory')}}">
         <!-- need the csrf tag in every POST method form -->
         @csrf
         <input type="hidden" name="id" value="{{$item->id}}">

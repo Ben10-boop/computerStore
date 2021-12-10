@@ -15,15 +15,17 @@
             </tr>
         </table>
     @endif
-    <div class="header" style="width:50%">
+    <div class="moduleHeader" >
         <h2>Paskyros redagavimas (Pagrindiniai elementai)</h2>
     </div>
-    <form class="content" style="width:50%" method="post" action="{{route('editUser')}}">
+    
+    <div style="width: 95%; margin: auto" >
+    <form class="content" style="width:40%; margin: auto"  method="post" action="{{route('editUser')}}">
         <!-- need the csrf tag in every POST method form -->
         @csrf
-        <div class="input-group">
-            <label>Vartotojo vardas:</label>
-            <input type="text" name="username" value="{{auth()->user()->username}}">
+        <div class=" form-group col">
+            <label class="control-label" >Vartotojo vardas:</label>
+            <input type="text"  class="form-control input-sm"  name="username" value="{{auth()->user()->username}}">
 
             @error('username')
                 <div style="font-size:16px;color:red">
@@ -31,9 +33,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Tikrasis vardas:</label>
-            <input type="text" name="name" value="{{auth()->user()->name}}">
+        <div class=" form-group col">
+            <label class="control-label" >Tikrasis vardas:</label>
+            <input type="text"  class="form-control input-sm"  name="name" value="{{auth()->user()->name}}">
 
             @error('name')
                 <div style="font-size:16px;color:red">
@@ -41,9 +43,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Pavardė:</label>
-            <input type="text" name="last_name" value="{{auth()->user()->last_name}}">
+        <div class=" form-group col">
+            <label class="control-label" >Pavardė:</label>
+            <input type="text"  class="form-control input-sm"  name="last_name" value="{{auth()->user()->last_name}}">
 
             @error('last_name')
                 <div style="font-size:16px;color:red">
@@ -51,9 +53,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Telefonas:</label>
-            <input type="tel" name="phone" value="{{auth()->user()->phone}}">
+        <div class=" form-group col">
+            <label class="control-label" >Telefonas:</label>
+            <input type="tel"  class="form-control input-sm"  name="phone" value="{{auth()->user()->phone}}">
 
             @error('phone')
                 <div style="font-size:16px;color:red">
@@ -61,9 +63,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Miestas:</label>
-            <input type="text" name="city" value="{{auth()->user()->city}}">
+        <div class=" form-group col">
+            <label class="control-label" >Miestas:</label>
+            <input type="text"  class="form-control input-sm"  name="city" value="{{auth()->user()->city}}">
 
             @error('city')
                 <div style="font-size:16px;color:red">
@@ -71,9 +73,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Gimimo data:</label>
-            <input type="date" name="birth_date" style="width:25%">
+        <div class=" form-group col">
+            <label class="control-label" >Gimimo data:</label>
+            <input type="date" class="form-control input-sm"  name="birth_date" >
             ; dabartinė:  <b>{{session('bd')}}</b>
 
             @error('birth_date')
@@ -82,9 +84,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Lytis:</label>
-            <select name="gender">
+        <div class=" form-group col">
+            <label class="control-label" >Lytis:</label>
+            <select name="gender"  class="form-control input-sm" >
                 <option>Vyras</option>
                 <option>Moteris</option>
                 <option>Kita</option>
@@ -99,19 +101,29 @@
         </div>
         <table>
             <tr>
-                <td style="width:33%">
-                    <div class="input-group">
-                        <button type="submit" class="btn">Patvirtinti pakeitimus</button>
+                <td >
+                    <div class="input-group"  >
+                        <button type="submit"  style=" width: 100%" class=" btn btn-secondary createButton">Patvirtinti pakeitimus</button>
                     </div>
                 </td>
-                <td style="width:33%">
-                    <a href="{{route('editAddress')}}" style="float:right">Redaguoti adresus</a>
-                </td>
-                <td style="width:33%">
-                    <a href="{{route('editAddress')}}" style="float:right">Redaguoti banko kortelę</a>
-                </td>
+            </tr>
+            <tr>
+                <td >
+                    <div class="input-group">
+                    <a href="{{route('editAddress')}}"   style=" width: 100%" class=" btn btn-secondary createButton">Redaguoti adresus</a>
+                    </div>
+                </td> 
+            </tr>
+            <tr>
+                <td >
+                    <div class="input-group">
+                    <a href="{{route('editCredit')}}"   style=" width: 100%" class=" btn btn-secondary createButton">Redaguoti banko kortelę</a>
+                    </div>
+                 </td>
+            </tr>
             </tr>
         </table>
     </form>
+    </div>
     <br>
 @endsection

@@ -4,15 +4,18 @@
     <div style="font-size:16px;padding:10px;color:red">
         <b>{{session('status')}}</b>
     </div>
-    <div class="header" style="width:50%">
+    
+    <div class="moduleHeader" >
         <h2>Prekės kategorijos kūrimas</h2>
     </div>
-    <form class="content" style="width:50%" method="post" action="{{route('addCategory')}}">
+    
+    <div style="width: 95%; margin: auto" >
+    <form class="content" style="width:40%; margin: auto"  method="post" action="{{route('addCategory')}}">
         <!-- need the csrf tag in every POST method form -->
         @csrf
-        <div class="input-group">
-            <label>Kategorijos pavadinimas:</label>
-            <input type="text" name="pavadinimas" value="{{old('pavadinimas')}}">
+        <div class=" form-group col">
+            <label class="control-label" >Kategorijos pavadinimas:</label>
+            <input type="text"   class="form-control input-sm" name="pavadinimas" value="{{old('pavadinimas')}}">
 
             @error('pavadinimas')
                 <div style="font-size:16px;color:red">
@@ -20,9 +23,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Aprašas:</label>
-            <input type="text" name="aprasas" value="{{old('aprasas')}}">
+        <div class=" form-group col">
+            <label class="control-label" >Aprašas:</label>
+            <input type="text" class="form-control input-sm" name="aprasas" value="{{old('aprasas')}}">
 
             @error('aprasas')
                 <div style="font-size:16px;color:red">
@@ -30,10 +33,12 @@
                 </div>
             @enderror
         </div>
+        <br>
         
         <div class="input-group">
-            <button type="submit" class="btn" name="register_btn">Sukurti kategoriją</button>
+            <button type="submit"  class=" btn btn-secondary createButton" name="register_btn">Sukurti kategoriją</button>
         </div>
     </form>
+    </div>
     <br>
 @endsection

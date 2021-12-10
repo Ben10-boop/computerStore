@@ -4,15 +4,16 @@
     <div style="font-size:16px;padding:10px;color:red">
         <b>{{session('status')}}</b>
     </div>
-    <div class="header" style="width:50%">
+    <div class="moduleHeader" >
         <h2>Darbuotojo paskyros kūrimas</h2>
     </div>
-    <form class="content" style="width:50%" method="post" action="{{route('addWorker')}}">
+    <div style="width: 95%; margin: auto" >
+    <form class="content" style="width:40%; margin: auto" method="post" action="{{route('addWorker')}}">
         <!-- need the csrf tag in every POST method form -->
         @csrf
-        <div class="input-group">
-            <label>Vartotojo vardas:</label>
-            <input type="text" name="username" value="{{old('username')}}">
+        <div class=" form-group col">
+             <label class="control-label" >Vartotojo vardas:</label>
+            <input type="text"   class="form-control input-sm"  name="username" value="{{old('username')}}">
 
             @error('username')
                 <div style="font-size:16px;color:red">
@@ -20,9 +21,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Elektroninio pašto adresas:</label>
-            <input type="text" name="email" value="{{old('email')}}">
+        <div class=" form-group col">
+             <label class="control-label" >Elektroninio pašto adresas:</label>
+            <input type="text"   class="form-control input-sm" name="email" value="{{old('email')}}">
 
             @error('email')
                 <div style="font-size:16px;color:red">
@@ -30,9 +31,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Atlyginimas:</label>
-            <input type="text" name="wage" value="{{old('wage')}}">
+        <div class=" form-group col">
+             <label class="control-label" >Atlyginimas:</label>
+            <input type="text"   class="form-control input-sm"   name="wage" value="{{old('wage')}}">
 
             @error('wage')
                 <div style="font-size:16px;color:red">
@@ -40,9 +41,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Įdarbinimo data:</label>
-            <input type="date" name="hire_date">
+        <div class=" form-group col">
+             <label class="control-label" >Įdarbinimo data:</label>
+            <input class="form-control input-sm"   type="date" name="hire_date">
 
             @error('hire_date')
                 <div style="font-size:16px;color:red">
@@ -50,9 +51,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Darbo valandos per savaitę:</label>
-            <input type="text" name="work_hours" value="{{old('work_hours')}}">
+        <div class=" form-group col">
+             <label class="control-label" >Darbo valandos per savaitę:</label>
+            <input class="form-control input-sm"   type="text" name="work_hours" value="{{old('work_hours')}}">
 
             @error('work_hours')
                 <div style="font-size:16px;color:red">
@@ -60,9 +61,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Pareigos:</label>
-            <input type="text" name="job" value="{{old('job')}}">
+        <div class=" form-group col">
+             <label class="control-label" >Pareigos:</label>
+            <input class="form-control input-sm"   type="text" name="job" value="{{old('job')}}">
 
             @error('job')
                 <div style="font-size:16px;color:red">
@@ -70,9 +71,9 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Slaptažodis:</label>
-            <input type="password" name="password">
+        <div class=" form-group col">
+             <label class="control-label" >Slaptažodis:</label>
+            <input class="form-control input-sm"   type="password" name="password">
 
             @error('password')
                 <div style="font-size:16px;color:red">
@@ -80,13 +81,15 @@
                 </div>
             @enderror
         </div>
-        <div class="input-group">
-            <label>Pakartoti slaptažodį:</label>
-            <input type="password" name="password_confirmation">
+        <div class=" form-group col">
+             <label class="control-label" >Pakartoti slaptažodį:</label>
+            <input class="form-control input-sm"   type="password" name="password_confirmation">
         </div>
+        <br>
         <div class="input-group">
-            <button type="submit" class="btn" name="register_btn">Sukurti darbuotojo paskyrą</button>
+            <button type="submit" class=" btn btn-secondary createButton" name="register_btn">Sukurti darbuotojo paskyrą</button>
         </div>
     </form>
+    </div>
     <br>
 @endsection

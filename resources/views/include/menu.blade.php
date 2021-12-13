@@ -71,7 +71,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('editUser')}}">Redaguoti paskyrą</a>
             </li>
-            
+            @if (auth()->user()->level == "darbuotojas")
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('addItem')}}">Pridėti prekę</a>
+            </li>
+            @endif
+
             @if (auth()->user()->level == "administratorius")
             <li class="nav-item ">
                 <a class="nav-link" href="{{route('addWorker')}}">Sukurti darbuotojo paskyrą</a>

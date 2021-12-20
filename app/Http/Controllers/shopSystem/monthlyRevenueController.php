@@ -55,9 +55,9 @@ class monthlyRevenueController extends Controller
                 ->where(DB::raw('EXTRACT(month FROM data)'), '=', $item->menuo)
                 ->leftJoin(
                     'prekes',
-                    'prekes.id',
+                    'prekes.barkodas',
                     '=',
-                    'uzsakymo_preke_s.prekes_id'
+                    'uzsakymo_preke_s.prekes_barkodas'
                 )
                 ->leftJoin(
                     'uzsakymas',
@@ -67,9 +67,9 @@ class monthlyRevenueController extends Controller
                 )
                 ->leftJoin(
                     'kainos',
-                    'kainos.prekes_id',
+                    'kainos.prekes_barkodas',
                     '=',
-                    'uzsakymo_preke_s.prekes_id'
+                    'uzsakymo_preke_s.prekes_barkodas'
                 )
                 ->groupBy('prek_pavadinimas')
                 ->get();

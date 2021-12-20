@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Request;
 use DB;
 use App\Models\Preke;
+use App\Models\Uzsakyma;
+use App\Models\Uzsakymo_preke_s;
 
 class monthlyRevenueController extends Controller
 {
@@ -19,34 +21,61 @@ class monthlyRevenueController extends Controller
     {
         $filter = Request::get('filter', ''); // ima filtro reiksme, jei nera - default ''
 
-        $products_list = Preke::select(
-            'prekes.barkodas as barkodas',
-            'kainos.id as kainos_id',
-            'barkodas',
-            'prek_pavadinimas',
-            'aprasymas',
-            'pagaminimo_salis',
-            'pagaminimo_metai',
-            'nuoroda_i_foto',
-            DB::raw('SUM(kiekis) as parduotas_kiekis'),
-            DB::raw('suma as vnt_kaina'),
-            DB::raw('SUM(kiekis) * suma as pajamos'),
-            DB::raw('MAX(pradzios_data) as latest_price_date')
+        $products_list = [];
+
+        $year_month = Uzsakymo_preke_s::select(
+            DB::raw('EXTRACT(year FROM data) AS metai'),
+            DB::raw('EXTRACT(month FROM data) AS menuo')
         )
-            ->where('barkodas', 'like', '%' . $filter . '%')
-            ->orWhere('aprasymas', 'like', '%' . $filter . '%')
-            ->orWhere('pagaminimo_salis', 'like', '%' . $filter . '%')
-            ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
-            ->leftJoin('kainos', 'kainos.prekes_barkodas', '=', 'prekes.barkodas')
             ->leftJoin(
-                'uzsakymo_preke_s',
-                'uzsakymo_preke_s.prekes_barkodas',
+                'uzsakymas',
+                'uzsakymas.id',
                 '=',
-                'prekes.barkodas'
+                'uzsakymo_preke_s.uzsakymas_id'
             )
-            ->groupBy('prekes.barkodas')
-            //->groupBy(' MONTH(MAX(pradzios_data) )')
+            ->groupBy(
+                DB::raw('EXTRACT(year FROM data)'),
+                DB::raw('EXTRACT(month FROM data)')
+            )
             ->get();
+
+        foreach ($year_month as $item) {
+            $products_group = Uzsakymo_preke_s::select(
+                'kainos.id as kainos_id',
+                'prek_pavadinimas',
+                'barkodas',
+                DB::raw('suma as vnt_kaina'),
+                DB::raw('SUM(kiekis) as parduotas_kiekis'),
+                DB::raw('SUM(kiekis) * suma as pajamos'),
+                DB::raw('MAX(pradzios_data) as latest_price_date'),
+                DB::raw('EXTRACT(year FROM data) AS metai'),
+                DB::raw('EXTRACT(month FROM data) AS menuo')
+            )
+                ->where(DB::raw('EXTRACT(year FROM data)'), '=', $item->metai)
+                ->where(DB::raw('EXTRACT(month FROM data)'), '=', $item->menuo)
+                ->leftJoin(
+                    'prekes',
+                    'prekes.id',
+                    '=',
+                    'uzsakymo_preke_s.prekes_id'
+                )
+                ->leftJoin(
+                    'uzsakymas',
+                    'uzsakymas.id',
+                    '=',
+                    'uzsakymo_preke_s.uzsakymas_id'
+                )
+                ->leftJoin(
+                    'kainos',
+                    'kainos.prekes_id',
+                    '=',
+                    'uzsakymo_preke_s.prekes_id'
+                )
+                ->groupBy('prek_pavadinimas')
+                ->get();
+
+            array_push($products_list, $products_group);
+        }
 
         return view('shopSystem.monthlyRevenue', [
             'products_list' => $products_list,

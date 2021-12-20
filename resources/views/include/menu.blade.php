@@ -97,6 +97,7 @@
 
         <div style="width: 95%; margin: auto" >
         <form class="  logOutBtn"   action="{{route('logout')}}" method="post">
+            @csrf
             <button class="btn btn-outline-success " type="submit">Atsijungti</button>
         </form>
         </div>

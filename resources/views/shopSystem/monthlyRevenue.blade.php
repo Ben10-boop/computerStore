@@ -12,27 +12,26 @@
     <table class='table thead-dark table-bordered table-hover'  >
     <thead style="background: #d1d1d1">
         <tr >
-            <th>Barkodas</th>
             <th>Pavadinimas</th>
-            <th>Pagaminimo šalis</th>
-            <th>Pagaminimo metai</th>
             <th>Vnt kaina</th>
             <th>Parduotas kiekis</th>
             <th>Pajamos</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($products_list as $item)
+    @foreach ($products_list as $month_group)
+    <tr><td colspan="4" style="text-align: center; background: #d5d9e0">Data: {{$month_group[0]->metai}} {{$month_group[0]->menuo}}</td></tr>
+        @foreach ($month_group as $item)
         <tr>
-            <td>{{$item->barkodas}}</td>
             <td>{{$item->prek_pavadinimas}}</td>
-            <td>{{$item->pagaminimo_salis}}</td>
-            <td>{{$item->pagaminimo_metai}}</td>
             <td>{{$item->vnt_kaina}}</td>
             <td>{{$item->parduotas_kiekis}}</td>
             <td>{{$item->pajamos}}</td>
         </tr>
         @endforeach
+
+
+    @endforeach
     </tbody>
     </table>
     </div>

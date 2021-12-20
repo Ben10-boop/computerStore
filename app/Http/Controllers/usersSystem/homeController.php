@@ -34,11 +34,9 @@ class homeController extends Controller
             'suma',
             DB::raw('MAX(pradzios_data) as latest_price_date')
         )
-            ->where('barkodas', 'like', '%' . $filter . '%')
-            ->orWhere('aprasymas', 'like', '%' . $filter . '%')
-            ->orWhere('pagaminimo_salis', 'like', '%' . $filter . '%')
-            ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
-            ->orWhere('pavadinimas', 'like', '%' . $filter . '%')
+            ->Where('aprasymas', 'like', '%' . $filter . '%')
+            ->orWhere('prek_pavadinimas', 'like', '%' . $filter . '%')
+            ->orWhere('suma', 'like', '%' . $filter . '%')
             ->leftJoin('kainos', 'kainos.prekes_barkodas', '=', 'prekes.barkodas')
             ->leftJoin(
                 'prekes_kategorijos',

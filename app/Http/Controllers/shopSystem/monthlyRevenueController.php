@@ -20,7 +20,7 @@ class monthlyRevenueController extends Controller
         $filter = Request::get('filter', ''); // ima filtro reiksme, jei nera - default ''
 
         $products_list = Preke::select(
-            'prekes.id as id',
+            'prekes.barkodas as barkodas',
             'kainos.id as kainos_id',
             'barkodas',
             'prek_pavadinimas',
@@ -37,14 +37,14 @@ class monthlyRevenueController extends Controller
             ->orWhere('aprasymas', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_salis', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
-            ->leftJoin('kainos', 'kainos.prekes_id', '=', 'prekes.id')
+            ->leftJoin('kainos', 'kainos.prekes_barkodas', '=', 'prekes.barkodas')
             ->leftJoin(
                 'uzsakymo_preke_s',
-                'uzsakymo_preke_s.prekes_id',
+                'uzsakymo_preke_s.prekes_barkodas',
                 '=',
-                'prekes.id'
+                'prekes.barkodas'
             )
-            ->groupBy('prekes.id')
+            ->groupBy('prekes.barkodas')
             //->groupBy(' MONTH(MAX(pradzios_data) )')
             ->get();
 

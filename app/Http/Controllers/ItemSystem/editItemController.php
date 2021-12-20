@@ -9,7 +9,7 @@ use App\Models\Kaino;
 use App\Models\Prekes_kategorijo;
 use Illuminate\Support\Facades\Hash;
 
-class addItemController extends Controller
+class editItemController extends Controller
 {
     //makes it so the controller can only be accessed if the user is logged in
     public function __construct()
@@ -17,9 +17,8 @@ class addItemController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function index()
-    {
-        //only workers are allowed to access this function, other users get sent away
+    public function index(Request $request)
+    { 
         if (
             auth()->user()->level != 'darbuotojas' &&
             auth()->user()->level != 'administratorius'
@@ -29,7 +28,23 @@ class addItemController extends Controller
                 ->with('status', 'Sussy baka');
         }
 
-        return view('ItemSystem.addItem');
+        $id = $request->edit;
+        $editable = Preke::select(
+            'id',
+            'barkodas',
+            'prek_pavadinimas',
+            'aprasymas',
+            'pagaminimo_salis',
+            'pagaminimo_metai',
+            'nuoroda_i_foto',
+        )
+            ->where('id', $id)
+            #->leftJoin('kainos', 'kainos.prekes_barkodas', '=', 'barkodas')
+            ->get();
+
+        return view('ItemSystem.editItem', [
+            'editable' => $editable,
+        ]);
     }
 
     public function save(Request $request)
@@ -46,9 +61,8 @@ class addItemController extends Controller
 
         //validation
         $this->validate($request, [
+            'id' => 'required|max:100',
             'prek_pavadinimas' => 'required|max:100',
-            'suma' => 'required|max:100',
-            #'kategoriju_sarasas' => 'required|max:100',
             'barkodas' => 'required|max:100',
             'aprasymas' => 'required|max:1000',
             'pagaminimo_salis' => 'required|max:100',
@@ -56,30 +70,12 @@ class addItemController extends Controller
             'pagaminimo_metai' => 'required|max:100',
         ]);
 
-        //calling model to add data to database
-        Preke::create([
-            'prek_pavadinimas' => $request->prek_pavadinimas,
-            #'kategoriju_sarasas' => 1,
-            'barkodas' => $request->barkodas,
-            'aprasymas' => $request->aprasymas,
-            'pagaminimo_salis' => $request->pagaminimo_salis,
-            'nuoroda_i_foto' => $request->nuoroda_i_foto,
-            'pagaminimo_metai' => $request->pagaminimo_metai,
-        ]);
-
-        Kaino::create([
-            'suma' => $request->suma,
-            'prekes_barkodas' => $request->barkodas,
-        ]);
-        Prekes_kategorijo::create([
-            'kategorijos_id' => $request->kategorijos_id,
-            'prekes_barkodas' => $request->barkodas,
-        ]);
-
-
+        Preke::save_edit($request);
+        Kaino::save_edit($request);
+        Prekes_kategorijo::save_edit($request);
         //redirecting with message
         return redirect()
             ->route('home')
-            ->with('status', 'Prekė sėkmingai pridėta');
+            ->with('status', 'Prekė sėkmingai redaguota');
     }
 }

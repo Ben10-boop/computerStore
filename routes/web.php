@@ -16,6 +16,10 @@ use App\Http\Controllers\usersSystem\productsController;
 use App\Http\Controllers\shopSystem\monthlyRevenueController;
 use App\Http\Controllers\shopSystem\viewCategoriesController;
 use App\Http\Controllers\shopSystem\addCategoryController;
+use App\Http\Controllers\ItemSystem\addItemController;
+use App\Http\Controllers\ItemSystem\editItemController;
+use App\Http\Controllers\ItemSystem\deleteItemController;
+use App\Http\Controllers\ItemSystem\previewItemController;
 use App\Http\Controllers\shopSystem\editCategoryController;
 /*
 /*
@@ -106,6 +110,28 @@ Route::get('/addCategory', [addCategoryController::class, 'index'])->name(
     'addCategory'
 );
 Route::post('/addCategory', [addCategoryController::class, 'save']);
+
+
+Route::get('/addItem', [addItemController::class, 'index'])->name(
+    'addItem'
+);
+Route::post('/addItem', [addItemController::class, 'save']);
+
+Route::get('/deleteItem', [deleteItemController::class, 'index'])->name(
+    'deleteItem'
+);
+
+Route::post('/deleteItem', [deleteItemController::class, 'save']);
+
+Route::get('/editItem', [editItemController::class, 'index'])->name(
+    'editItem'
+);
+Route::post('/editItem', [editItemController::class, 'save']);
+
+Route::get('/previewItem', [previewItemController::class, 'index'])->name(
+    'previewItem'
+);
+Route::post('/previewItem', [previewItemController::class, 'save']);
 
 Route::get('/editCategory', [editCategoryController::class, 'index'])->name(
     'editCategory'

@@ -21,7 +21,12 @@
         @foreach ($products_list as $item)
   <div class="col mb-4">
     <div class="card">
-      <img src="{{$item->nuoroda_i_foto}}" class="card-img-top" style="height: 350px; widht: 100px; object-fit: cover;" >
+      <form  method="post" action="{{route('previewItem')}}">
+        @csrf
+        <input type="hidden" name="id" value="{{$item->id}}">
+        <button type="submit" class="btn" name="preview_btn">
+            <img src="{{$item->nuoroda_i_foto}}" class="card-img-top" style="height: 350px; widht: 100px; object-fit: cover;" >
+      </from>
       <div class="card-body">
         <h5 class="card-title">{{$item->prek_pavadinimas}}</h5>
         <p class="card-text">Kaina: {{$item->suma}} eur.</p>

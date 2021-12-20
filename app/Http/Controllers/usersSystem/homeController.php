@@ -39,12 +39,12 @@ class homeController extends Controller
             ->orWhere('pagaminimo_salis', 'like', '%' . $filter . '%')
             ->orWhere('pagaminimo_metai', 'like', '%' . $filter . '%')
             ->orWhere('pavadinimas', 'like', '%' . $filter . '%')
-            ->leftJoin('kainos', 'kainos.prekes_id', '=', 'prekes.id')
+            ->leftJoin('kainos', 'kainos.prekes_barkodas', '=', 'prekes.barkodas')
             ->leftJoin(
                 'prekes_kategorijos',
-                'prekes_kategorijos.prekes_id',
+                'prekes_kategorijos.prekes_barkodas',
                 '=',
-                'prekes.id'
+                'prekes.barkodas'
             )
             ->leftJoin(
                 'kategorijos',
@@ -52,7 +52,7 @@ class homeController extends Controller
                 '=',
                 'kategorijos.id'
             )
-            ->groupBy('prekes.id')
+            ->groupBy('prekes.barkodas')
             ->get();
 
         return view('index', [
